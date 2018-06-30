@@ -1,20 +1,21 @@
-package app
+package cmd
 
 import (
 	"github.com/spf13/cobra"
 	_	"github.com/spf13/pflag"
 	"fmt"
+	"io"
 )
 
 const (
-	// Kubelet component name
-	componentKubelet = "kubelet"
+	// Kcem component name
+	componentKcem = "kcem"
 )
 
-func NewKubeletCommand() *cobra.Command {
+func NewKcemCommand(in io.Reader, out, err io.Writer) *cobra.Command {
 
 	cmd := &cobra.Command{
-		Use: componentKubelet,
+		Use: componentKcem,
 		Long: `The kubelet is the primary "node agent" that runs on each
 node. The kubelet works in terms of a PodSpec. A PodSpec is a YAML or JSON object
 that describes a pod. The kubelet takes a set of PodSpecs that are provided through
@@ -23,12 +24,14 @@ described in those PodSpecs are running and healthy. The kubelet doesn't manage
 containers which were not created by kubernetes.
 
 `,
-		DisableFlagParsing: true,
+		DisableFlagParsing: false,
 		Run: func(cmd *cobra.Command, args []string) {
-			fmt.Println("Starting KubeletCommand ...")
+			fmt.Println("Starting ...")
 		},
 
 	}
+
+	cmd.AddCommand(NewCmdInit(out))
 
 	return cmd
 }
