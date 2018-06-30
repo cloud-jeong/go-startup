@@ -32,6 +32,7 @@ containers which were not created by kubernetes.
 	}
 
 	cmd.AddCommand(NewCmdInit(out))
+	cmd.AddCommand(NewCmdStatus(out))
 
 	return cmd
 }
