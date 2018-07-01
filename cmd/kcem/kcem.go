@@ -14,6 +14,7 @@ func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
 
 	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
+
 	// Hidden flags when --help
 	pflag.CommandLine.MarkHidden("version")
 
