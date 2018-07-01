@@ -43,13 +43,20 @@ func NewCmdStatus(out io.Writer) *cobra.Command {
 			if err != nil {
 				panic(err.Error())
 			}
-			fmt.Printf("There are %v pods in the cluster\n", pods.Items[0])
+			fmt.Printf("kube-system %d pods running\n", len(pods.Items))
 
 			pods, err = clientset.CoreV1().Pods("cocktail-system").List(metav1.ListOptions{})
 			if err != nil {
 				panic(err.Error())
 			}
 			fmt.Printf("cocktail-system %d pods running\n", len(pods.Items))
+
+			pods, err = clientset.CoreV1().Pods("monitoring").List(metav1.ListOptions{})
+			if err != nil {
+				panic(err.Error())
+			}
+			fmt.Printf("monitoring %d pods running\n", len(pods.Items))
+
 
 
 		},
