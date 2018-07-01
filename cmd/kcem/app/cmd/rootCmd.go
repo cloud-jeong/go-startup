@@ -19,7 +19,7 @@ func NewKcemCommand(in io.Reader, out, err io.Writer) *cobra.Command {
 
 	kcemOption := &options.KcemFlags{}
 
-	cmd := &cobra.Command{
+	rootCmd := &cobra.Command{
 		Use: componentKcem,
 		Short: "Kubernetes-cem",
 		Long: `Provide kubernetes cluster information remotely.
@@ -32,13 +32,14 @@ It seems like kubectl.
 
 	}
 
-	cmd.PersistentFlags().StringVar(&kcemOption.KubeConfig, "kubeconfig", filepath.Join(homeDir(), ".kube", "config"), "absolute path to the kubeconfig file")
-	cmd.PersistentFlags().StringVar(&kcemOption.LogLevel, "loglevel", "", "Log level")
+	rootCmd.PersistentFlags().StringVar(&kcemOption.KubeConfig, "kubeconfig", filepath.Join(homeDir(), ".kube", "config"), "absolute path to the kubeconfig file")
+	rootCmd.PersistentFlags().StringVar(&kcemOption.LogLevel, "loglevel", "", "Log level")
 
-	cmd.AddCommand(NewCmdInit(out))
-	cmd.AddCommand(NewCmdStatus(out))
+	rootCmd.AddCommand(NewCmdInit(out))
+	rootCmd.AddCommand(NewCmdStatus(out))
+	rootCmd.AddCommand(NewCmdCreate(out))
 
-	return cmd
+	return rootCmd
 }
 
 func homeDir() string {

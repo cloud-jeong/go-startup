@@ -12,7 +12,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-// NewCmdStatus returns "kcem status" command.
+// NewCmdCreate returns "kcem create" command.
 func NewCmdCreate(out io.Writer) *cobra.Command {
 
 	queryOptions := &options.Status{}
@@ -79,7 +79,7 @@ func NewCmdCreate(out io.Writer) *cobra.Command {
 			}
 			fmt.Printf("Created deployment %q.\n", result.GetObjectMeta().GetName())
 
-			},
+		},
 	}
 
 	cmd.Flags().StringVarP(&queryOptions.NameSpace, "namespace", "n", "--all-namespaces", "Namespace name to query")
