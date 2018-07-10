@@ -1,18 +1,55 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"log"
+	"os"
+
+	"github.com/cloud-jeong/go-startup/cmd/simpleweb/handlers"
+	"os/signal"
+	"syscall"
+	"context"
 )
 
 func main() {
 	log.Print("Starting the service ...")
-	http.HandleFunc("/home", func(w http.ResponseWriter, _ *http.Request) {
-		fmt.Fprint(w, "/home called")
-	},
-	)
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("Port is not set.")
+	}
+
+	r := handlers.Router()
+
+	interrupt := make(chan os.Signal, 1)
+	signal.Notify(interrupt, os.Interrupt, os.Kill, syscall.SIGTERM)
+
+	srv := &http.Server {
+		Addr : ":" + port,
+		Handler: r,
+	}
+
+	go func() {
+		log.Fatal(srv.ListenAndServe())
+	}()
 	log.Print("The service is ready to listen and service.")
-	log.Fatal(http.ListenAndServe(":8000", nil))
+
+	killSignal := <-interrupt
+
+	switch killSignal {
+	case os.Kill:
+		log.Print("Got SIGKILL ...")
+	case os.Interrupt:
+		log.Print("Got SIGINT ...")
+	case syscall.SIGTERM:
+		log.Print("Got SIGTERM ...")
+	}
+
+	log.Print("The service is shutting down ...")
+	srv.Shutdown(context.Background())
+
+	log.Print("Done")
+
 }
+
+
