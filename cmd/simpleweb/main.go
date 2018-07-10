@@ -19,12 +19,12 @@ func main() {
 		workDir, _ = os.Getwd()
 	)
 
-	//logFile, err := os.OpenFile(workDir + "/log/log.txt", os.O_CREATE | os.O_APPEND | os.O_RDWR, 0666)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//mw := io.MultiWriter(os.Stdout, logFile)
-	//log.SetOutput(mw)
+	logFile, err := os.OpenFile(workDir + "/log/log.txt", os.O_CREATE | os.O_APPEND | os.O_RDWR, 0666)
+	if err != nil {
+		panic(err)
+	}
+	mw := io.MultiWriter(os.Stdout, logFile)
+	log.SetOutput(mw)
 
 	log.Print("Starting the service ...")
 
@@ -49,10 +49,10 @@ func main() {
 	log.Print("The service is ready to listen and service.")
 
 	go func() {
-		//data, _ := ioutil.ReadFile(workDir + "/test/config.json")
+		data, _ := ioutil.ReadFile(workDir + "/test/config.json")
 
 		for {
-			log.Printf("%s\n", "fdasfdsafdsafdsafdsafdsafdsafdsafdsafdsafdsafdsafdsafdasfdsafdsafdsafdsafdsa")
+			log.Printf("%s\n", string(data))
 			time.Sleep(3)
 		}
 	}()
