@@ -49,10 +49,12 @@ func main() {
 	log.Print("The service is ready to listen and service.")
 
 	go func() {
-		data, _ := ioutil.ReadFile(workDir + "/test/config.json")
-		log.Printf("%s\n", string(data))
+		//data, _ := ioutil.ReadFile(workDir + "/test/config.json")
 
-		time.Sleep(3)
+		for {
+			log.Printf("%s\n", "fdasfdsafdsafdsafdsafdsafdsafdsafdsafdsafdsafdsafdsafdasfdsafdsafdsafdsafdsa")
+			time.Sleep(3)
+		}
 	}()
 
 	killSignal := <-interrupt
