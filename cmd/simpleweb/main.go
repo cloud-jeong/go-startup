@@ -19,12 +19,12 @@ func main() {
 		workDir, _ = os.Getwd()
 	)
 
-	logFile, err := os.OpenFile(workDir + "/log/log.txt", os.O_CREATE | os.O_APPEND | os.O_RDWR, 0666)
-	if err != nil {
-		panic(err)
-	}
-	mw := io.MultiWriter(os.Stdout, logFile)
-	log.SetOutput(mw)
+	//logFile, err := os.OpenFile(workDir + "/log/log.txt", os.O_CREATE | os.O_APPEND | os.O_RDWR, 0666)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//mw := io.MultiWriter(os.Stdout, logFile)
+	//log.SetOutput(mw)
 
 	log.Print("Starting the service ...")
 
