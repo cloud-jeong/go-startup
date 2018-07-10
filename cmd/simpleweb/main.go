@@ -9,9 +9,23 @@ import (
 	"os/signal"
 	"syscall"
 	"context"
+	"io/ioutil"
+	"io"
+	"time"
 )
 
 func main() {
+	var (
+		workDir, _ = os.Getwd()
+	)
+
+	logFile, err := os.OpenFile(workDir + "/log/log.txt", os.O_CREATE | os.O_APPEND | os.O_RDWR, 0666)
+	if err != nil {
+		panic(err)
+	}
+	mw := io.MultiWriter(os.Stdout, logFile)
+	log.SetOutput(mw)
+
 	log.Print("Starting the service ...")
 
 	port := os.Getenv("PORT")
@@ -33,6 +47,13 @@ func main() {
 		log.Fatal(srv.ListenAndServe())
 	}()
 	log.Print("The service is ready to listen and service.")
+
+	go func() {
+		data, _ := ioutil.ReadFile(workDir + "/test/config.json")
+		log.Printf("%s\n", string(data))
+
+		time.Sleep(3)
+	}()
 
 	killSignal := <-interrupt
 
