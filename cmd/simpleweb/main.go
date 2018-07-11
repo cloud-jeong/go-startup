@@ -5,13 +5,13 @@ import (
 	"log"
 	"os"
 
-	"github.com/cloud-jeong/go-startup/cmd/simpleweb/handlers"
 	"os/signal"
 	"syscall"
 	"context"
 	"io/ioutil"
 	"io"
 	"time"
+	"github.com/cloud-jeong/go-startup/cmd/simpleweb/handlers"
 )
 
 func main() {
@@ -53,7 +53,7 @@ func main() {
 
 		for {
 			log.Printf("%s\n", string(data))
-			time.Sleep(3)
+			time.Sleep(10)
 		}
 	}()
 
