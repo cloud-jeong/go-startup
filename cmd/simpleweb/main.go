@@ -26,7 +26,7 @@ func main() {
 	mw := io.MultiWriter(os.Stdout, logFile)
 	log.SetOutput(mw)
 
-	log.Print("Starting the service ...")
+	log.Print("Starting the service .....")
 
 	port := os.Getenv("PORT")
 	if port == "" {
