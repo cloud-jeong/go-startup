@@ -53,7 +53,7 @@ func main() {
 
 		for {
 			log.Printf("%s\n", string(data))
-			time.Sleep(10)
+			time.Sleep(60)
 		}
 	}()
 
