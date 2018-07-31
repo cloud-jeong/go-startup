@@ -7,7 +7,7 @@ import (
 	"math/rand"
 	"github.com/spf13/pflag"
 	"flag"
-	"github.com/cloud-jeong/go-startup/cmd/kcem/app/cmd"
+	"github.com/cloud-jeong/go-startup/cmd/kcem/cmd"
 )
 
 func main() {

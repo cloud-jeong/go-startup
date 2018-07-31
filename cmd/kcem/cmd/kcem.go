@@ -5,12 +5,13 @@ import (
 	_	"github.com/spf13/pflag"
 	"fmt"
 	"io"
-	"github.com/cloud-jeong/go-startup/cmd/kcem/app/cmd/options"
+	"github.com/cloud-jeong/go-startup/cmd/kcem/cmd/options"
 	"os"
 	"path/filepath"
 )
 
-var globalUsage = `The Kubernetes package manager
+var globalUsage = `
+The Kubernetes package manager
 
 To begin working with Helm, run the 'helm init' command:
 

@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"io"
-	"github.com/cloud-jeong/go-startup/cmd/kcem/app/cmd/options"
+	"github.com/cloud-jeong/go-startup/cmd/kcem/cmd/options"
 	"fmt"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	appsv1 "k8s.io/api/apps/v1"
@@ -11,6 +11,31 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/kubernetes"
 )
+
+const createHelp = `
+This command creates a chart directory along with the common files and
+directories used in a chart.
+
+For example, 'helm create foo' will create a directory structure that looks
+something like this:
+
+	foo/
+	  |
+	  |- .helmignore   # Contains patterns to ignore when packaging Helm charts.
+	  |
+	  |- Chart.yaml    # Information about your chart
+	  |
+	  |- values.yaml   # The default values for your templates
+	  |
+	  |- charts/       # Charts that this chart depends on
+	  |
+	  |- templates/    # The template files
+
+'helm create' takes a path for an argument. If directories in the given path
+do not exist, Helm will attempt to create them as it goes. If the given
+destination exists and there are files in that directory, conflicting files
+will be overwritten, but other files will be left alone.
+`
 
 // NewCmdCreate returns "kcem create" command.
 func NewCmdCreate(out io.Writer) *cobra.Command {
@@ -20,8 +45,8 @@ func NewCmdCreate(out io.Writer) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "create",
 		Short: "Run this command to create k8s Deployment",
+		Long:  createHelp,
 		Run: func(cmd *cobra.Command, args []string) {
-
 			config, err := clientcmd.BuildConfigFromFlags("", "/Users/cloud/.kube/acorn_kube_config")
 			if err != nil {
 				panic(err.Error())
@@ -82,8 +107,9 @@ func NewCmdCreate(out io.Writer) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVarP(&queryOptions.NameSpace, "namespace", "n", "--all-namespaces", "Namespace name to query")
-	cmd.Flags().StringVarP(&queryOptions.PodName, "podname", "p", "", "Pod name to query")
+	f := cmd.Flags()
+	f.StringVarP(&queryOptions.NameSpace, "namespace", "n", "--all-namespaces", "Namespace name to query")
+	f.StringVarP(&queryOptions.PodName, "podname", "p", "", "Pod name to query")
 
 	return cmd
 }

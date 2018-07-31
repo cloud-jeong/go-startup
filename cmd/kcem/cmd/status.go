@@ -54,7 +54,7 @@ func NewCmdStatus(out io.Writer) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   	"status",
 		Short: 	"Run this command to get current cluster status",
-		Long: 	statusHelp,
+		Long: statusHelp,
 		PreRunE: func(cmd *cobra.Command, args []string) error {
 			fmt.Println("PreRunE() callled")
 			return nil
