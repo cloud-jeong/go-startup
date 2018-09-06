@@ -8,10 +8,9 @@ import (
 	"os/signal"
 	"syscall"
 	"context"
-	"io/ioutil"
 	"io"
-	"time"
 	"github.com/cloud-jeong/go-startup/cmd/simpleweb/handlers"
+	"path"
 )
 
 func main() {
@@ -19,10 +18,19 @@ func main() {
 		workDir, _ = os.Getwd()
 	)
 
-	logFile, err := os.OpenFile(workDir + "/log/log.txt", os.O_CREATE | os.O_APPEND | os.O_RDWR, 0666)
+	logFileName := workDir + "/log/log.txt"
+
+	if err := os.MkdirAll(path.Dir(logFileName), 0755); err != nil {
+		log.Fatal(err)
+	}
+
+	logFile, err := os.OpenFile(logFileName, os.O_CREATE | os.O_APPEND | os.O_RDWR, 0666)
 	if err != nil {
 		panic(err)
 	}
+
+	defer logFile.Close()
+
 	mw := io.MultiWriter(os.Stdout, logFile)
 	log.SetOutput(mw)
 
@@ -48,14 +56,14 @@ func main() {
 	}()
 	log.Print("The service is ready to listen and service.")
 
-	go func() {
-		data, _ := ioutil.ReadFile(workDir + "/test/config.json")
-
-		for {
-			log.Printf("%s\n", string(data))
-			time.Sleep(60)
-		}
-	}()
+	//go func() {
+	//	data, _ := ioutil.ReadFile(workDir + "/test/config.json")
+	//
+	//	for {
+	//		log.Printf("%s\n", string(data))
+	//		time.Sleep(30 * time.Second)
+	//	}
+	//}()
 
 	killSignal := <-interrupt
 
@@ -74,5 +82,3 @@ func main() {
 	log.Print("Done")
 
 }
-
-

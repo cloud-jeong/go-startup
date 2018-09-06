@@ -5,6 +5,7 @@ import (
 	"sync/atomic"
 	"time"
 	"log"
+	"net/http"
 )
 
 func Router() *mux.Router {
@@ -20,7 +21,8 @@ func Router() *mux.Router {
 	}()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/home", home).Methods("GET")
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./techmag/")))
+	//r.HandleFunc("/", home).Methods("GET")
 	r.HandleFunc("/healthz", healthz)
 	r.HandleFunc("/readyz", readyz(isReady))
 

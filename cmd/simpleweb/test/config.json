@@ -1,11 +1,20 @@
-## This is log test data
-
-### Server Binaries
-
-filename | sha256 hash
--------- | -----------
-[kubernetes-server-linux-amd64.tar.gz](https://dl.k8s.io/v1.10.5/kubernetes-server-linux-amd64.tar.gz) | `27838c15e6ba3805d35d5321b0b58c4c481548406559c7b7407686c2492b5a51`
-[kubernetes-server-linux-arm.tar.gz](https://dl.k8s.io/v1.10.5/kubernetes-server-linux-arm.tar.gz) | `4c7e451a5cb592060012c90fa9367e17c22ecb7d6fb0a946369ea749c5bc064d`
-[kubernetes-server-linux-arm64.tar.gz](https://dl.k8s.io/v1.10.5/kubernetes-server-linux-arm64.tar.gz) | `af9b54b8dfb9eeac86a3169fbe294e24109c7cfaef8ef70bb709922f10e51713`
-[kubernetes-server-linux-ppc64le.tar.gz](https://dl.k8s.io/v1.10.5/kubernetes-server-linux-ppc64le.tar.gz) | `3063e8d2107d51a2a3992caf5a629e36f984d3158fb1dd57775d38d3d4118499`
-[kubernetes-server-linux-s390x.tar.gz](https://dl.k8s.io/v1.10.5/kubernetes-server-linux-s390x.tar.gz) | `ffd1315f7618daba89dae9828eefb8a8da3c155172ed079879276b323de83fc0`
+Sep  5 17:25:54 master1 ansible-systemd: Invoked with no_block=False name=kubelet enabled=True daemon_reload=False state=started user=False masked=None
+Sep  5 22:40:16 master1 NetworkManager[633]: <info>  [1536154816.0407] dhcp4 (eth0):   lease time 86400
+Sep  5 22:40:16 master1 NetworkManager[633]: <info>  [1536154816.0407] dhcp4 (eth0):   nameserver '10.0.2.3'
+Sep  5 22:40:16 master1 NetworkManager[633]: <info>  [1536154816.0407] dhcp4 (eth0):   domain name 'kornet'
+Sep  5 22:40:16 master1 NetworkManager[633]: <info>  [1536154816.0407] dhcp4 (eth0): state changed unknown -> bound
+Sep  5 22:40:16 master1 dbus[614]: [system] Activating via systemd: service name='org.freedesktop.nm_dispatcher' unit='dbus-org.freedesktop.nm-dispatcher.service'
+Sep  5 22:40:16 master1 dhclient[5748]: bound to 10.0.2.15 -- renewal in 32711 seconds.
+Sep  5 22:40:16 master1 systemd: Starting Network Manager Script Dispatcher Service...
+Sep  5 22:40:16 master1 dbus[614]: [system] Successfully activated service 'org.freedesktop.nm_dispatcher'
+Sep  5 22:40:16 master1 systemd: Started Network Manager Script Dispatcher Service.
+Sep  5 22:40:16 master1 nm-dispatcher: req:1 'dhcp4-change' [eth0]: new request (3 scripts)
+Sep  5 22:40:16 master1 nm-dispatcher: req:1 'dhcp4-change' [eth0]: start running ordered scripts...
+Sep  5 22:44:00 master1 etcd: store.index: compact 10746
+Sep  5 22:44:00 master1 etcd: finished scheduled compaction at 10746 (took 1.051841ms)
+Sep  5 22:47:43 master1 kernel: hrtimer: interrupt took 3531564 ns
+Sep  5 22:49:00 master1 etcd: store.index: compact 11115
+Sep  5 22:49:00 master1 etcd: finished scheduled compaction at 11115 (took 726.378µs)
+Sep  5 22:49:55 master1 systemd: Started Session 2 of user root.
+Sep  5 22:49:55 master1 systemd-logind: New session 2 of user root.
+Sep  5 22:49:55 master1 systemd: Starting Session 2 of user root.
